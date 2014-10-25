@@ -1,0 +1,80 @@
+---
+title: "Principal Components / Exploratory Factor Analysis"
+author: "Gennaro Anesi"
+highlighter: highlight.js
+output: pdf_document
+job: Statistician
+knit: slidify::knit2slides
+mode: selfcontained
+hitheme: tomorrow
+subtitle: a ShinyApps project
+framework: io2012
+widgets: mathjax
+
+---
+
+## The Project
+
+<!-- Center image on slide -->
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+<script type='text/javascript'>
+$(function() {
+    $("p:has(img)").addClass('centered');
+});
+</script>
+
+
+  This shiny app intends to do a Principal Components or an Exploratory Factor Analysis on the famous Wine dataset. 
+These techiques are statistical methods to reduce the number of variables in a database. To to so, the methods basically group the variables that are highly correlated in respect to some correlation measure.
+
+```{r scplot,dev='png',fig.width=5, fig.height=6, echo=FALSE}
+  library(psych)
+  library(GPArotation)
+  wine <- read.table("http://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data",sep=",")
+  names(wine)=c("ID","Alcohol","Malic_Acid","Ash","Alcalinity_of_ash","Magnesium","Total_phenols","Flavanoids","Nonflavanoid_phenols","Proanthocyanins","Color_intensity","Hue","OD280_OD315_of_diluted_wines","Proline")
+  m=principal(wine[,c(1,3,5,7,9)],nfactors=2,rotate="none")
+  biplot(m,main="Principal Components Analysis with 2 factors")
+
+```
+
+--- .class #id 
+
+## Available Options
+
+>- In this app, you can:
+  - Select the variables to enter the model
+  - Choose an analysis type (principal components or exploratoru factor analysis)
+  - Select a rotation method
+  - Specify the desired number of factors
+
+>- The output contais:
+  - The analysis summary
+  - A biplot of the analysis
+  - The factor loadings for the selected number of factors
+  - A sample containing the first 20 rows of data
+
+---
+## The app
+
+<div id="centerbox" align="center">
+<iframe src="https://gennaroanesi.shinyapps.io/courseproject/index.html" style="width: 100%; height: 400px;"></iframe>
+</div>
+
+---
+## Thank you!
+
+<div style="text-align:center;">Visit the app webpage: <a href="https://gennaroanesi.shinyapps.io/courseproject/"</a> https://gennaroanesi.shinyapps.io/courseproject/</div>
+
+
+</br>
+</br>
+</br>
+</br>
+<img style="float: right;" title="Gennaro Anesi" src="http://www.gennaroanesi.com/site/images/articles/20140425_foto.jpg" alt="Foto Gennaro" width="135" height="153">
+Gennaro Anesi 
+</br>
+</br>
+http://www.gennaroanesi.com 
+</br>
+</br>
+<a href="mailto:gennaroanesi@gmail.com">gennaroanesi@gmail.com</a>
